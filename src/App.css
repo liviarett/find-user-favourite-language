@@ -25,6 +25,10 @@
   font-size: large;
 }
 
+.avatar img {
+  max-width: 200px;
+}
+
 .user-wrapper {
   display: flex;
   align-items: center;
@@ -32,6 +36,14 @@
   margin: auto;
   border: 1px solid black;
   padding: 1.5em;
+}
+
+.search-form {
+  padding: 2em 0;
+}
+
+.search-form input {
+  margin-right: 1em;
 }
 
 .user-wrapper ul {
@@ -44,6 +56,40 @@
   display: inline-block;
   width: 200px;
   line-height: 1.5em;
+}
+
+.lds-ripple {
+  margin: 4em 0;
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #00184d;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
 }
 
 @keyframes App-logo-spin {

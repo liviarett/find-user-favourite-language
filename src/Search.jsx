@@ -11,7 +11,8 @@ class Search extends Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    !!e && e.preventDefault();
     this.props.onSubmit(this.state.user);
   }
 
@@ -23,10 +24,10 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
+      <form className="search-form pure-form">
         <input type="text" onKeyPress={this.handleEnterPress} onChange={this.handleInput} ></input>
-        <button onClick={this.handleSubmit}>Look for user!</button>
-      </div>
+        <button className="pure-button pure-button-primary" onClick={this.handleSubmit}>Look for user!</button>
+      </form>
     );
   }
 }

@@ -3,17 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import Search from './Search';
 import UserWrapper from './UserWrapper';
+import Loader from './Loader';
 
 class App extends Component {
   state = {
-    userInfo: {}
-  }
-
-  componentDidMount() {
-    this.handleSubmit('liviarett');
+    userInfo: {},
+    favouriteLanguage: '',
+    isLoading: false,
   }
 
   handleSubmit = (user) => {
+    this.setState({
+      isLoading: true,
+      userInfo: {},
+      favouriteLanguage: ''
+    })
     this.getUserInfo(user)
       .then(data => {
         this.getRepoInfo(data.reposUrl)
@@ -47,10 +51,11 @@ class App extends Component {
         };
 
         this.setState({
-          userInfo: data
+          userInfo: data,
+          isLoading: false,
         })
         return data;
-    })
+      })
   }
 
   getRepoInfo = (url) => {
@@ -106,14 +111,26 @@ class App extends Component {
         })
     })
   }
+
   render() {
+    const hasUser = !(() => {
+      for (var key in this.state.userInfo) {
+        if (this.state.userInfo.hasOwnProperty(key))
+          return false;
+      }
+      return true;
+    })();
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <Search text='Hello World' onSubmit={this.handleSubmit} />
-        <UserWrapper userInfo={{...this.state.userInfo, favouriteLanguage: this.state.favouriteLanguage }} />
+          {this.state.isLoading ?
+            <Loader /> :
+            hasUser && <UserWrapper userInfo={{...this.state.userInfo, favouriteLanguage: this.state.favouriteLanguage }} />
+          }
       </div>
     );
   }
