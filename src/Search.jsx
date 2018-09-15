@@ -15,10 +15,16 @@ class Search extends Component {
     this.props.onSubmit(this.state.user);
   }
 
+  handleEnterPress = (event) => {
+    if (event.key === 'Enter') {
+      this.handleSubmit();
+    }
+  }
+
   render() {
     return (
       <div>
-        <input type="text" onChange={this.handleInput} ></input>
+        <input type="text" onKeyPress={this.handleEnterPress} onChange={this.handleInput} ></input>
         <button onClick={this.handleSubmit}>Look for user!</button>
       </div>
     );
